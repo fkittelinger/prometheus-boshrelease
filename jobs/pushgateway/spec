@@ -6,6 +6,7 @@ packages:
 
 templates:
   bin/pushgateway_ctl: bin/pushgateway_ctl
+  bin/pre-start.erb: bin/pre-start
 
 properties:
   pushgateway.log_format:

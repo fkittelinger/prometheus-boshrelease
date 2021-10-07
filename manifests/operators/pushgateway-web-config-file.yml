@@ -1,3 +1,12 @@
 - type: replace
   path: /instance_groups/name=prometheus2/jobs/name=pushgateway/properties/pusgateway/web?/config_file?
   value: ((pushgateway_web_config_file))
+
+- type: replace
+  path: /instance_groups/name=prometheus2/jobs/name=pushgateway/properties?/pusgateway/web?/config_file?
+  value:
+    tls_config:
+      cert_contents: ((pushgateway.certificate))
+      cert_file: /var/vcap/jobs/pushgateway/certs/pushgateway_cert.cert
+      key_contents: ((pushgateway.private_key))
+      key_file: /var/vcap/jobs/pushgateway/certs/pushgateway_key.cert

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+<% if_p("pushgateway.web.config_file") do |config_file| %>
+  <% configs.each do |config| %>
+    <% if config['tls_config'] %>
+      <% if config['tls_config']['cert_contents'] %>
+        mkdir -p $(dirname <%= config['tls_config']['cert_file'] %>)
+        echo "<%= config['tls_config']['cert_contents'] %>" > <%= config['tls_config']['cert_file'] %>
+      <% end %>
+      <% if config['tls_config']['key_contents'] %>
+        mkdir -p $(dirname <%= config['tls_config']['key_file'] %>)
+        echo "<%= config['tls_config']['key_contents'] %>" > <%= config['tls_config']['key_file'] %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

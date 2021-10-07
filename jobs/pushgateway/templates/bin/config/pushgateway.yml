@@ -1,0 +1,8 @@
+<% configs = p('pushgateway.web.config_file', []).map do |scrape_config|
+  scrape_config = scrape_config.clone
+  scrape_config['tls_config'] = config['tls_config'].clone
+  ['cert_contents', 'key_contents'].each { |key| config['tls_config'].delete(key) } if config['tls_config']
+  scrape_config
+end %>
+
+configs: <%= configs.to_json %>
